@@ -3,58 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Links - Radyan Fahmi</title>
+    <title>Portal Cek Nasib</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // Konfigurasi warna hijau khas
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        naver: '#03c75a',
+                        naverDark: '#02b351'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Menghilangkan ring fokus default browser */
+        input:focus {
+            ring: 0 !important;
+            outline: none !important;
+        }
+        /* Transisi halus untuk dropdown */
+        .dropdown-enter {
+            opacity: 0;
+            transform: scale(0.95) translateY(-10px);
+        }
+        .dropdown-enter-active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            transition: opacity 200ms ease-out, transform 200ms ease-out;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-b from-blue-950 to-cyan-600 min-h-screen text-white font-sans antialiased flex justify-center py-12 px-4">
+<body class="bg-[#f4f4f4] text-gray-800 font-sans relative min-h-screen overflow-x-hidden">
 
-    <div class="w-full max-w-md flex flex-col items-center">
-        
-        <img src="https://radyanfahmi.com/wp-content/uploads/2026/03/123.png" alt="Foto Profil" class="w-28 h-28 rounded-full border-4 border-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.4)] object-cover mb-4">
-        
-        <h1 class="text-2xl font-bold tracking-wide text-white">Radyan Fahmi</h1>
-        <p class="text-cyan-100 mt-2 mb-6 text-center text-sm px-4">
-            Illustrator & Comic Artist | Kunjungi portofolio saya di radyanfahmi.com
-        </p>
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30 transition-opacity" onclick="toggleMenu()"></div>
 
-        <div class="flex space-x-6 mb-8">
-            <a href="https://instagram.com/radyanfahmi" target="_blank" class="text-cyan-200 hover:text-white hover:scale-110 transition-all duration-300 text-3xl">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" target="_blank" class="text-cyan-200 hover:text-white hover:scale-110 transition-all duration-300 text-3xl">
-                <i class="fab fa-x-twitter"></i>
-            </a>
-            <a href="#" target="_blank" class="text-cyan-200 hover:text-white hover:scale-110 transition-all duration-300 text-3xl">
-                <i class="fab fa-artstation"></i>
-            </a>
+    <div id="sideMenu" class="fixed top-0 left-0 w-72 h-full bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-40">
+        <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+            <span class="font-extrabold text-xl text-naver">Menu Navigasi</span>
+            <button onclick="toggleMenu()" class="text-gray-400 hover:text-gray-800 focus:outline-none transition-colors">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
         </div>
-
-        <div class="w-full space-y-4">
-            
-            <a href="https://radyanfahmi.com" target="_blank" class="block w-full py-4 px-6 text-center font-medium bg-blue-900 bg-opacity-50 border border-cyan-400 rounded-xl hover:bg-cyan-500 hover:bg-opacity-90 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] transition-all duration-300">
-                🌐 Website Portofolio
-            </a>
-            
-            <a href="#" target="_blank" class="block w-full py-4 px-6 text-center font-medium bg-blue-900 bg-opacity-50 border border-cyan-400 rounded-xl hover:bg-cyan-500 hover:bg-opacity-90 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] transition-all duration-300">
-                🎨 Info Jasa Ilustrasi & Komik
-            </a>
-            
-            <a href="#" target="_blank" class="block w-full py-4 px-6 text-center font-medium bg-blue-900 bg-opacity-50 border border-cyan-400 rounded-xl hover:bg-cyan-500 hover:bg-opacity-90 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] transition-all duration-300">
-                📖 Baca Komik Original (Dyana & Eva)
-            </a>
-            
-            <a href="#" target="_blank" class="block w-full py-4 px-6 text-center font-medium bg-blue-900 bg-opacity-50 border border-cyan-400 rounded-xl hover:bg-cyan-500 hover:bg-opacity-90 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] transition-all duration-300">
-                ✉️ Hubungi Saya (Email/WhatsApp)
-            </a>
-
-        </div>
-
-        <div class="mt-12 text-sm text-cyan-200 opacity-60">
-            &copy; 2026 radyanfahmi.com
-        </div>
-
+        <ul class="flex flex-col p-4">
+            <li>
+                <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-naver rounded-lg font-medium transition-colors">Your Waifu</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-naver rounded-lg font-medium transition-colors">Your Husbando</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-naver rounded-lg font-medium transition-colors">Nomor Togel</a>
+            </li>
+        </ul>
     </div>
 
+    <header class="flex items-center justify-between px-4 sm:px-6 py-4 relative z-20">
+        
+        <button onclick="toggleMenu()" class="text-gray-800 hover:text-naver focus:outline-none transition-colors">
+            <svg class="w-8 h-8 sm:w-9 sm:h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        
+        <div class="flex items-center space-x-5 ml-auto relative">
+            
+            <div class="relative">
+                <button onclick="toggleApps(event)" class="text-gray-500 hover:text-naver focus:outline-none transition-colors flex items-center justify-center" title="Website Lainnya">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24">
+                        <circle cx="5" cy="5" r="2"></circle>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <circle cx="19" cy="5" r="2"></circle>
+                        <circle cx="5" cy="12" r="2"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                        <circle cx="19" cy="12" r="2"></circle>
+                        <circle cx="5" cy="19" r="2"></circle>
+                        <circle cx="12" cy="19" r="2"></circle>
+                        <circle cx="19" cy="19" r="2"></circle>
+                    </svg>
+                </button>
+                
+                <div id="appsDropdown" class="absolute right-0 mt-4 w-56 bg-white rounded-xl shadow-xl border border-gray-100 hidden overflow-hidden">
+                    <div class="px-4 py-3 bg-gray-50 border-b border-gray-100">
+                        <span class="text-sm font-bold text-gray-700">Layanan Ekstra</span>
+                    </div>
+                    <ul class="py-2">
+                        <li>
+                            <a href="https://example.com" target="_blank" class="flex items-center px-4 py-3 hover:bg-green-50 hover:text-naver transition-colors">
+                                <span class="text-lg mr-3">🌐</span>
+                                <span class="text-sm font-medium">Website Custom 1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://example.com" target="_blank" class="flex items-center px-4 py-3 hover:bg-green-50 hover:text-naver transition-colors">
+                                <span class="text-lg mr-3">🎨</span>
+                                <span class="text-sm font-medium">Portfolio Saya</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://example.com" target="_blank" class="flex items-center px-4 py-3 hover:bg-green-50 hover:text-naver transition-colors">
+                                <span class="text-lg mr-3">🛒</span>
+                                <span class="text-sm font-medium">Toko Online</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="relative">
+                <button onclick="toggleNotif(event)" class="text-gray-500 hover:text-naver focus:outline-none transition-colors relative" title="Notifikasi">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                    </svg>
+                    <span class="absolute top-0 right-0 inline-flex items-center justify-center w-3 h-3 bg-red-500 rounded-full border-2 border-[#f4f4f4]"></span>
+                </button>
+
+                <div id="notifDropdown" class="absolute right-0 mt-4 w-72 bg-white rounded-xl shadow-xl border border-gray-100 hidden overflow-hidden">
+                    <div class="px-4 py-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                        <span class="text-sm font-bold text-gray-700">Notifikasi Terbaru</span>
+                        <span class="text-xs text-naver cursor-pointer hover:underline">Tandai dibaca</span>
+                    </div>
+                    <ul class="flex flex-col">
+                        <li class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                            <a href="#" class="block px-4 py-3">
+                                <p class="text-sm text-gray-800 font-medium">Sistem Berhasil Diperbarui 🚀</p>
+                                <p class="text-xs text-gray-500 mt-1">Sistem prediksi nasib Anda sudah menggunakan algoritma terbaru.</p>
+                                <p class="text-[10px] text-gray-400 mt-2">10 menit yang lalu</p>
+                            </a>
+                        </li>
+                        <li class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                            <a href="#" class="block px-4 py-3">
+                                <p class="text-sm text-gray-800 font-medium">Ada Pesan Baru Masuk ✉️</p>
+                                <p class="text-xs text-gray-500 mt-1">Seorang klien tertarik dengan layanan pembuatan web Anda.</p>
+                                <p class="text-[10px] text-gray-400 mt-2">1 jam yang lalu</p>
+                            </a>
+                        </li>
+                        <li class="hover:bg-gray-50 transition-colors">
+                            <a href="#" class="block px-4 py-3">
+                                <p class="text-sm text-gray-800 font-medium">Promo Berakhir Hari Ini ⚠️</p>
+                                <p class="text-xs text-gray-500 mt-1">Diskon 50% untuk langganan hosting akan segera berakhir.</p>
+                                <p class="text-[10px] text-gray-400 mt-2">Kemarin</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="flex flex-col items-center mt-12 sm:mt-24 px-4 w-full max-w-4xl mx-auto z-10 relative">
+        
+        <div class="w-full flex relative group bg-white shadow-sm rounded-full overflow-hidden transition-shadow hover:shadow-md border border-[#C7C7C7]">
+            <input type="text" 
+                   id="mainNameInput"
+                   placeholder="Ketik nama Anda di sini..." 
+                   onkeypress="handleKeyPress(event)"
+                   class="w-full pl-5 sm:pl-8 pr-16 sm:pr-[100px] py-3 sm:py-5 text-base sm:text-xl bg-transparent outline-none text-gray-700 font-medium placeholder-gray-400">
+            
+            <button onclick="generateLuck()" class="absolute right-0 top-0 h-full bg-naver text-white px-5 sm:px-8 flex items-center justify-center hover:bg-naverDark transition-colors" title="Cek Nasib">
+                <svg class="w-5 h-5 sm:w-7 sm:h-7 transform rotate-45 -ml-1 sm:-ml-2 mt-1 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-5 gap-4 sm:gap-8 mt-10 sm:mt-12 w-full max-w-2xl px-2 sm:px-4">
+            <div class="flex flex-col items-center space-y-1 sm:space-y-2 cursor-pointer group">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center group-hover:bg-green-50 transition-colors shadow-sm border border-gray-100">
+                    <span class="text-gray-500 group-hover:text-naver font-bold text-lg sm:text-xl">✉️</span>
+                </div>
+                <span class="text-xs sm:text-sm font-medium text-gray-600">Mail</span>
+            </div>
+            <div class="flex flex-col items-center space-y-1 sm:space-y-2 cursor-pointer group">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center group-hover:bg-green-50 transition-colors shadow-sm border border-gray-100">
+                    <span class="text-gray-500 group-hover:text-naver font-bold text-lg sm:text-xl">☕</span>
+                </div>
+                <span class="text-xs sm:text-sm font-medium text-gray-600">Cafe</span>
+            </div>
+            <div class="flex flex-col items-center space-y-1 sm:space-y-2 cursor-pointer group">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center group-hover:bg-green-50 transition-colors shadow-sm border border-gray-100">
+                    <span class="text-gray-500 group-hover:text-naver font-bold text-lg sm:text-xl">📝</span>
+                </div>
+                <span class="text-xs sm:text-sm font-medium text-gray-600">Blog</span>
+            </div>
+            <div class="flex flex-col items-center space-y-1 sm:space-y-2 cursor-pointer group">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center group-hover:bg-green-50 transition-colors shadow-sm border border-gray-100">
+                    <span class="text-gray-500 group-hover:text-naver font-bold text-lg sm:text-xl">🛒</span>
+                </div>
+                <span class="text-xs sm:text-sm font-medium text-gray-600">Shopping</span>
+            </div>
+            <div class="flex flex-col items-center space-y-1 sm:space-y-2 cursor-pointer group">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center group-hover:bg-green-50 transition-colors shadow-sm border border-gray-100">
+                    <span class="text-gray-500 group-hover:text-naver font-bold text-lg sm:text-xl">📰</span>
+                </div>
+                <span class="text-xs sm:text-sm font-medium text-gray-600">News</span>
+            </div>
+        </div>
+    </main>
+
+    <div id="luckModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex items-center justify-center px-4 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 sm:p-8 relative transform transition-all scale-95 opacity-0" id="luckModalContent">
+            
+            <button onclick="closeLuckModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div id="luckResultSection" class="text-center mt-2">
+                <div class="text-5xl mb-4" id="luckEmoji">✨</div>
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Hasil Terawangan</h2>
+                
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-6">
+                    <p class="text-sm text-gray-500 mb-1">Halo, <span id="displayName" class="font-bold text-gray-700"></span></p>
+                    <p id="luckTextResult" class="text-lg font-bold text-naver"></p>
+                </div>
+
+                <button onclick="closeLuckModal()" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-xl transition-colors">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const nasibArray = [
+            { teks: "Nasibmu hari ini baik", emoji: "😊" },
+            { teks: "Nasibmu hari ini mengenaskan", emoji: "😭" },
+            { teks: "Nasibmu hari ini kurang baik", emoji: "😔" },
+            { teks: "Akan ada keberuntungan besar", emoji: "🎉" }
+        ];
+
+        // Toggle Sidebar Kiri
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            const overlay = document.getElementById('overlay');
+            
+            menu.classList.toggle('-translate-x-full'); // Ubah dari translate-x-full agar animasi dari kiri
+            
+            if (overlay.classList.contains('hidden')) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.add('opacity-100'), 10);
+            } else {
+                overlay.classList.remove('opacity-100');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        // Toggle Dropdown 9 Dots (Apps)
+        function toggleApps(event) {
+            event.stopPropagation(); // Mencegah klik menyebar ke dokumen
+            const appsDrop = document.getElementById('appsDropdown');
+            const notifDrop = document.getElementById('notifDropdown');
+            
+            // Tutup notifikasi jika terbuka
+            notifDrop.classList.add('hidden');
+            
+            // Toggle Apps dropdown
+            appsDrop.classList.toggle('hidden');
+        }
+
+        // Toggle Dropdown Notifikasi
+        function toggleNotif(event) {
+            event.stopPropagation(); // Mencegah klik menyebar ke dokumen
+            const appsDrop = document.getElementById('appsDropdown');
+            const notifDrop = document.getElementById('notifDropdown');
+            
+            // Tutup apps jika terbuka
+            appsDrop.classList.add('hidden');
+            
+            // Toggle Notifikasi dropdown
+            notifDrop.classList.toggle('hidden');
+        }
+
+        // Menutup Dropdown saat area di luar dropdown di-klik
+        document.addEventListener('click', function(event) {
+            const appsDropdown = document.getElementById('appsDropdown');
+            const notifDropdown = document.getElementById('notifDropdown');
+            
+            if (!event.target.closest('#appsDropdown')) {
+                appsDropdown.classList.add('hidden');
+            }
+            if (!event.target.closest('#notifDropdown')) {
+                notifDropdown.classList.add('hidden');
+            }
+        });
+
+        // Trigger input saat tekan enter
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                generateLuck();
+            }
+        }
+
+        // Proses Keberuntungan
+        function generateLuck() {
+            const nameInput = document.getElementById('mainNameInput').value.trim();
+            
+            if (nameInput === "") {
+                alert("Harap ketik nama Anda di kolom terlebih dahulu!");
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * nasibArray.length);
+            const hasil = nasibArray[randomIndex];
+
+            document.getElementById('displayName').innerText = nameInput;
+            document.getElementById('luckTextResult').innerText = hasil.teks;
+            document.getElementById('luckEmoji').innerText = hasil.emoji;
+            
+            const resultElement = document.getElementById('luckTextResult');
+            if (hasil.teks.includes("mengenaskan") || hasil.teks.includes("kurang baik")) {
+                resultElement.className = "text-lg font-bold text-red-500";
+            } else {
+                resultElement.className = "text-lg font-bold text-naver";
+            }
+
+            openLuckModal();
+        }
+
+        // Buka Modal Hasil
+        function openLuckModal() {
+            const modal = document.getElementById('luckModal');
+            const modalContent = document.getElementById('luckModalContent');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        // Tutup Modal Hasil
+        function closeLuckModal() {
+            const modal = document.getElementById('luckModal');
+            const modalContent = document.getElementById('luckModalContent');
+            
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
 </body>
 </html>
